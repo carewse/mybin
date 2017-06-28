@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+set host [lindex $argv 0]
+set pwd [lindex $argv 1]
+#puts $host
+#puts $pwd
+set timeout 300
+spawn ssh caifujun@$host
+expect {
+"*(yes/no)?" { send "yes\r";exp_continue}
+"*password:" { send "${pwd}\r"}
+}
+interact
